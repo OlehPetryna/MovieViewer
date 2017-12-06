@@ -23,12 +23,12 @@ Local deploy:
 
 
 Application architecture:
- - MovieViewer uses MVC design pattern.
+ - MovieViewer uses/implements MVC design pattern.
  
 Base classes\scripts functionality: 
- - Entry script - index.php - accepts all requests, initialize instance of App class with provided config file and runs the application. 
+ - Entry script - index.php - accepts all requests, initializes instance of App class with provided config file and runs the application. 
  - App class is responsible for registering autoload function, initializing and saving in memory config file (+ creating instances of classes components)
- (you can access all of config propeties presented as array via App::$app call), running needed Controller's action and returning response.
+ (you can access all of config properties presented as array via App::$app call), running needed Controller's action and returning response.
  - app\base\Router - responsible for routing.
  - app\base\Controller, app\base\View, app\base\Model - base classes for all Controllers, Models, Views. 
  - app\base\Connection - provides PDO instance with data from config.
@@ -36,6 +36,6 @@ Base classes\scripts functionality:
  - app\components\DbQuery - wrapper to work with database.
  - app\controller\SiteController - handling all requests associated with Movies
  - app\model\MovieModel - represents Movie table, contains necessary logic.
- - js/main.js - contains all JavaScript logic (click handlers, ajax, popup function)
+ - js/main.js - contains all client-side logic (click handlers, ajax, popup function)
 
   
