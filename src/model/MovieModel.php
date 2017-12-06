@@ -37,7 +37,7 @@ class MovieModel extends Model
 
     public static function importFromFile($path,$name)
     {
-        if(preg_match("/\.\w+$/", $name)!=="txt")
+        if(!preg_match("/\.txt+$/", $name))
             throw new \Exception("Invalid file format", 500);
         $f = fopen($path, 'r');
 
