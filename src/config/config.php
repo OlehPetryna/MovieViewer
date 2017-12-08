@@ -22,6 +22,6 @@ return [
             "/" => "site/index",
         ]
     ],
-    "debug" => true,
+    "debug" => false,
     "viewPath" => __DIR__."/../view/",
 ];
