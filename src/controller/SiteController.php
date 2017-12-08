@@ -41,7 +41,7 @@ class SiteController extends Controller
                 $model->save();
         }
 
-        return json_encode(["response" => $res], JSON_UNESCAPED_UNICODE);
+        return json_encode(["$res" => 1], JSON_UNESCAPED_UNICODE);
     }
 
     public function actionAddMovieView()
@@ -65,7 +65,7 @@ class SiteController extends Controller
 
         if(isset($_POST["deleteMovie"]) && $_POST["deleteMovie"] === "delete"){
             $res = $model->delete();
-            return json_encode($res ? ["success" => 1] : ["fail" => 1],JSON_UNESCAPED_UNICODE);
+            return json_encode($res ? ["success" => 1] : ["error" => 1],JSON_UNESCAPED_UNICODE);
         }
 
         return $this->view->renderWithoutLayout("confirmPopup", ["model" => $model]);
