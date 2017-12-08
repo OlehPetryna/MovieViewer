@@ -6,7 +6,7 @@ list($dbHost,$dbName,$dbUser,$dbPass) = $argv;
 $pdo = new \PDO("mysql:host=$dbHost;dbname=$dbName;",$dbUser,$dbPass);
 $pdo->exec("DROP TABLE IF EXISTS `Movie`;");
 
-echo "dropped existing table Movie if exists\n";
+echo "dropped table Movie if exists\n";
 
 $sql ="CREATE TABLE Movie(
      id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
