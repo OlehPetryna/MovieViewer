@@ -10,12 +10,16 @@ MovieViewer provides next features:
  
 Local deploy:
  - 1.Run start.sh from it's directory and provide it 4 arguments in next order - host for MySQL database, database name, database username, database user's password.
- It will create Movie table in specified database and run PHP web-server locally on 8000 port.
+ You should provide already existing database and user.
  
- example run: 
+     start.sh will:
+      - drop old Movie table if it's exists.
+      - create new Movie table in specified database and run PHP web-server locally on 8000 port.
+ 
+   example run: 
                
                 cd /path/to/project/
-                ./start.sh dbHost dbName dbUser dbPassword
+                ./start.sh dbHost dbName dbUser dbUserPassword
                 
  - 2.Fill information about your database in /src/config/config.php.
  - 3.Visit localhost:8000 to see index page. 
