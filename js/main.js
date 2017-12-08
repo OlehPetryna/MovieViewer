@@ -168,7 +168,10 @@ document.querySelector('body').addEventListener('click', function (ev) {
         data = JSON.stringify({movieId:id, deleteMovie:"delete"});
         ajaxRequest("POST",data,"delete-movie",function(data){
             data = JSON.parse(data);
-            document.querySelector(".confirm-delete__message").innerHTML = data.success ? "Movie deleted" : "Error while deleting";
+            if(data.success)
+                Popup.closePopup();
+            else
+                document.querySelector(".confirm-delete__message").innerHTML = data.success ? "Movie deleted" : "Error while deleting";
         }, this, btn, "application/json");
     }
 
@@ -201,7 +204,10 @@ document.querySelector('body').addEventListener('submit', function (ev) {
                 ev.target.querySelector(".movie-edit__response-msg").innerHTML = data.error;
             else{
                 data = JSON.parse(data);
-                ev.target.querySelector(".movie-edit__response-msg").innerHTML = data.response === "success" ? "Data saved" : "Error while saving";
+                if(data.success && form.className === "movie-save-new")
+                    Popup.closePopup();
+                else
+                    ev.target.querySelector(".movie-edit__response-msg").innerHTML = data.success ? "Data saved": "Error while saving";
             }
         }, $this, document.querySelector(".movie-edit__save-btn"));
     } else if (ev.target.className === "import-file") {
