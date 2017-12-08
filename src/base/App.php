@@ -39,8 +39,10 @@ class App
             $json = file_get_contents("php://input");
             if($json){
                 $json = json_decode($json,true);
-                foreach ($json as $key => $val)
-                    $_POST[$key] = $val;
+                if($json){
+                    foreach ($json as $key => $val)
+                        $_POST[$key] = $val;
+                }
             }
         }
     }
