@@ -101,8 +101,10 @@ class DbQuery
                     throw new \Exception("condition array should contain 3 vals - operator, columnName and value",500);
                 }
 
+                $val = $this->cleanInput($val);
                 $wheres .= empty($wheres) ? "WHERE ($col $operator $val)" : " OR ($col $operator $val)";
             }else{
+                $val = $this->cleanInput($val);
                 $wheres .= empty($wheres) ? "WHERE ($key = $val)" : " OR ($key = $val)";
             }
         }
@@ -118,5 +120,10 @@ class DbQuery
             $models[] = $model;
         }
         return $models;
+    }
+
+    private function cleanInput($input)
+    {
+        return filter_var($input,FILTER_SANITIZE_FULL_SPECIAL_CHARS,FILTER_FLAG_NO_ENCODE_QUOTES);
     }
 }

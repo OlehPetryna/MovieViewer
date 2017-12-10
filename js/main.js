@@ -29,8 +29,17 @@ var Popup = {
             if (this.readyState !== 4)
                 return;
 
+            var data;
 
-            var data = document.createElement('div');
+            if(this.status !== 200){
+                data = document.createElement('div');
+                data.innerHTML = this.response;
+                data = data.querySelector(".error-block");
+                document.querySelector("body .content").innerHTML = data.innerHTML;
+                return;
+            }
+
+            data = document.createElement('div');
             data.innerHTML = this.response;
             data = data.querySelector(".popup");
 
@@ -125,7 +134,10 @@ function renderMoviesList(query) {
     ajaxRequest("POST",data,"render-movies",function (data) {
         var div = document.createElement("div");
         div.className = "movies";
-        div.innerHTML = data;
+        if(data.error)
+            div.innerHTML = data.error;
+        else
+            div.innerHTML = data;
         body.replaceChild(div,document.querySelector(".movies"));
     }, this, null, "application/json");
 }

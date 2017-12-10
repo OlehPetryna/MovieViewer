@@ -28,6 +28,8 @@ class MovieModel extends Model
         if(!is_array($this->actors)){
             $this->actors = json_decode($this->actors);
         }
+
+        $this->validate();
     }
 
     public static function getTableName()
@@ -55,7 +57,7 @@ class MovieModel extends Model
                     $tmp = array_pop($data);
                     $data[1] = implode(": ", [$data[1],$tmp]);
                 }
-                $data[0] = strtolower($data[0]);
+                $data[0] = trim(strtolower($data[0]));
                 $data[0] = preg_replace_callback("/\s\w{1}/",function($matches){
                     return strtoupper(substr($matches[0], 1));
                 }, $data[0]);
@@ -73,5 +75,14 @@ class MovieModel extends Model
         }
 
         fclose($f);
+    }
+
+    protected function validate()
+    {
+        if($this->id && !is_numeric($this->id))
+            throw new \Exception("id must be an integer",500);
+
+        if($this->releaseYear && !is_numeric($this->releaseYear))
+            throw new \Exception("release year  must be an integer",500);
     }
 }

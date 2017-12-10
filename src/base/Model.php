@@ -5,17 +5,25 @@ namespace app\base;
 
 use app\components\DbQuery;
 
-class Model
+abstract class Model
 {
     public function __construct(array $attributes = [])
     {
         if(!empty($attributes)){
             foreach ($attributes as $key => $val) {
-                $this->$key = $val;
+                if(is_array($val))
+                    $this->$key = array_map(function($v){
+                        return trim(htmlspecialchars($v));
+                    }, $val);
+                else
+                    $this->$key = trim(htmlspecialchars_decode($val));
+
             }
         }
 
     }
+
+    protected abstract function validate();
 
     public function save()
     {
